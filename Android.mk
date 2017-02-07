@@ -61,6 +61,10 @@ LOCAL_SRC_FILES:= \
 
 LOCAL_CPP_EXTENSION := .cc
 
+ifeq ($(MULTI_LANG_ENGINE),REVERIE)
+LOCAL_STATIC_LIBRARIES += revlib
+endif
+
 LOCAL_SHARED_LIBRARIES := \
         libcutils \
         libicuuc \

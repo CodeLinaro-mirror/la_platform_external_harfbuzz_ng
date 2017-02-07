@@ -39,6 +39,9 @@
 #include "hb-ot-layout-private.hh"
 #include "hb-set-private.hh"
 
+#ifdef REVERIE
+#include "rev_rendering.h"
+#endif
 
 static hb_tag_t common_features[] = {
   HB_TAG('c','c','m','p'),
@@ -552,6 +555,10 @@ hb_ot_shape_internal (hb_ot_shape_context_t *c)
   HB_BUFFER_ALLOCATE_VAR (c->buffer, unicode_props0);
   HB_BUFFER_ALLOCATE_VAR (c->buffer, unicode_props1);
 
+#ifdef REVERIE 
+  if(shapeReverie(c->font,c->buffer)==0)
+  {
+#endif
   c->buffer->clear_output ();
 
   hb_set_unicode_props (c->buffer);
@@ -564,6 +571,10 @@ hb_ot_shape_internal (hb_ot_shape_context_t *c)
   hb_ot_position (c);
 
   hb_ot_hide_default_ignorables (c);
+
+#ifdef REVERIE 
+  }
+#endif
 
   HB_BUFFER_DEALLOCATE_VAR (c->buffer, unicode_props1);
   HB_BUFFER_DEALLOCATE_VAR (c->buffer, unicode_props0);
