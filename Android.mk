@@ -30,6 +30,7 @@ ifeq ($(MULTI_LANG_ENGINE),REVERIE)
 LOCAL_CFLAGS += -DREVERIE
 endif
 
+
 LOCAL_SRC_FILES:= \
 	src/hb-blob.cc \
 	src/hb-buffer-serialize.cc \
@@ -61,6 +62,7 @@ LOCAL_SRC_FILES:= \
 
 LOCAL_CPP_EXTENSION := .cc
 
+
 ifeq ($(MULTI_LANG_ENGINE),REVERIE)
 LOCAL_STATIC_LIBRARIES += revlib
 endif
@@ -77,6 +79,11 @@ LOCAL_C_INCLUDES += \
         external/icu4c/common
 
 LOCAL_CFLAGS += -DHB_NO_MT -DHAVE_OT -DHAVE_ICU
+
+#ifeq ($(MULTI_LANG_ENGINE),REVERIE)
+#LOCAL_C_INCLUDES += \
+        vendor/reverie
+#endif
 
 LOCAL_LDLIBS += -lpthread
 
