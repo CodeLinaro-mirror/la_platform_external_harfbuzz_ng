@@ -33,12 +33,16 @@ struct face_options_t
 {
   ~face_options_t ()
   {
-    g_free (face_loader);
     g_free (font_file);
+    g_free (face_loader);
+    hb_face_destroy (face);
   }
 
   void set_face (hb_face_t *face_)
-  { face = face_; }
+  {
+    hb_face_destroy (face);
+    face = hb_face_reference (face_);
+  }
 
   void add_options (option_parser_t *parser);
 
@@ -94,15 +98,16 @@ face_options_t::post_parse (GError **error)
   }
 
   if ((!cache.font_path || 0 != strcmp (cache.font_path, font_path)) ||
-      (cache.face_loader != face_loader && 0 != strcmp (cache.face_loader, face_loader)) ||
+      (cache.face_loader != face_loader &&
+       (cache.face_loader && face_loader && 0 != strcmp (cache.face_loader, face_loader))) ||
       cache.face_index != face_index)
   {
     hb_face_destroy (cache.face);
     cache.face = hb_face_create_from_file_or_fail_using (font_path, face_index, face_loader);
     cache.face_index = face_index;
 
-    free ((char *) cache.font_path);
-    free ((char *) cache.face_loader);
+    g_free ((char *) cache.font_path);
+    g_free ((char *) cache.face_loader);
     cache.font_path = g_strdup (font_path);
     cache.face_loader = face_loader ? g_strdup (face_loader) : nullptr;
 
@@ -110,11 +115,12 @@ face_options_t::post_parse (GError **error)
     {
       g_set_error (error, G_OPTION_ERROR, G_OPTION_ERROR_FAILED,
 		   "%s: Failed loading font face", font_path);
+      return_value = RETURN_VALUE_FACE_LOAD_FAILED;
       return;
     }
   }
 
-  face = cache.face;
+  set_face (cache.face);
 }
 
 static G_GNUC_NORETURN gboolean
@@ -140,14 +146,11 @@ face_options_t::add_options (option_parser_t *parser)
       g_string_printf (s, "Set face loader to use (default: none)\n    No supported face loaders found");
     else
     {
+      char *supported_str = g_strjoinv ("/", (char **) supported_face_loaders);
       g_string_printf (s, "Set face loader to use (default: %s)\n    Supported face loaders are: %s",
 		       supported_face_loaders[0],
-		       supported_face_loaders[0]);
-      for (unsigned i = 1; supported_face_loaders[i]; i++)
-      {
-	g_string_append_c (s, '/');
-	g_string_append (s, supported_face_loaders[i]);
-      }
+		       supported_str);
+      g_free (supported_str);
     }
     face_loaders_text = g_string_free (s, FALSE);
     parser->free_later (face_loaders_text);
@@ -167,6 +170,9 @@ face_options_t::add_options (option_parser_t *parser)
 		     "Font-face options:",
 		     "Options for the font face",
 		     this);
+
+  parser->add_environ("HB_FACE_LOADER=face-loader; Overrides the default face loader.");
+  parser->add_exit_code (RETURN_VALUE_FACE_LOAD_FAILED, "Failed loading font face.");
 }
 
 #endif
