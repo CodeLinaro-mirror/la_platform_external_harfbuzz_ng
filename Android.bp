@@ -106,6 +106,7 @@ cc_library {
     host_supported: true,
 
     srcs: [
+        "src/graph/gsubgpos-context.cc",
         "src/hb-number.cc",
         "src/hb-ot-cff1-table.cc",
         "src/hb-ot-cff2-table.cc",
@@ -116,9 +117,11 @@ cc_library {
         "src/hb-subset-input.cc",
         "src/hb-subset-instancer-iup.cc",
         "src/hb-subset-instancer-solver.cc",
+        "src/hb-subset-plan-layout.cc",
+        "src/hb-subset-plan-var.cc",
         "src/hb-subset-plan.cc",
+        "src/hb-subset-serialize.cc",
         "src/hb-subset.cc",
-        "src/graph/gsubgpos-context.cc",
     ],
     target: {
         windows: {
@@ -151,6 +154,7 @@ cc_library {
         },
     },
     srcs: [
+        "src/OT/Var/VARC/VARC.cc",
         "src/hb-aat-layout.cc",
         "src/hb-aat-map.cc",
         "src/hb-blob.cc",
@@ -194,6 +198,7 @@ cc_library {
         "src/hb-ot-tag.cc",
         "src/hb-ot-var.cc",
         "src/hb-outline.cc",
+        "src/hb-paint-bounded.cc",
         "src/hb-paint-extents.cc",
         "src/hb-paint.cc",
         "src/hb-set.cc",
