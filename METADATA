@@ -11,11 +11,10 @@ third_party {
   }
   version: "10.2.0"
   license_type: RESTRICTED
-  license_note: "would be NOTICE save for GPL in:\n"
-  " m4/ax_code_coverage.m4\n"
-  " Also take care when vendoring in not to import content like the\n"
-  " culp/ligatures font with CC-BY-NC-SA licensing. Google does not want to\n"
-  " host CC-BY-NC* content.\n"
+  license_note: "would be NOTICE save for GPL in:\n m4/ax_code_coverage.m4\n Also take care when vendoring in not to import content like the\n culp/ligatures font with CC-BY-NC-SA licensing. Google does not want to\n host CC-BY-NC* content.\n"
+  security {
+    tag: "NVD-CPE2.3:cpe:/a:harfbuzz_project:harfbuzz:10.2.0"
+  }
   last_upgrade_date {
     year: 2025
     month: 1
