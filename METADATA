@@ -8,7 +8,7 @@ third_party {
   license_type: RESTRICTED
   license_note: "would be NOTICE save for GPL in:\n m4/ax_code_coverage.m4\n Also take care when vendoring in not to import content like the\n culp/ligatures font with CC-BY-NC-SA licensing. Google does not want to\n host CC-BY-NC* content.\n"
   security {
-    tag: "NVD-CPE2.3:cpe:/a:harfbuzz_project:harfbuzz:11.3.2"
+    tag: "NVD-CPE2.3:cpe:/a:harfbuzz_project:harfbuzz:11.4.1"
   }
   last_upgrade_date {
     year: 2025
@@ -18,6 +18,6 @@ third_party {
   identifier {
     type: "Git"
     value: "https://github.com/harfbuzz/harfbuzz"
-    version: "11.3.2"
+    version: "11.4.1"
   }
 }
