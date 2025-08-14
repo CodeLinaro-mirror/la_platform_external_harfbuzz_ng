@@ -94,9 +94,9 @@ license {
 
         "LICENSE_APACHE2.TXT",
         "LICENSE_ISC.TXT",
+        "LICENSE_MIT_MODERN_VARIANT.TXT",
         "LICENSE_OFL.TXT",
         "src/ms-use/COPYING", // For MIT license
-        "LICENSE_MIT_MODERN_VARIANT.TXT",
     ],
 }
 
@@ -121,6 +121,11 @@ cc_library {
         "src/hb-subset-plan-var.cc",
         "src/hb-subset-plan.cc",
         "src/hb-subset-serialize.cc",
+        "src/hb-subset-table-cff.cc",
+        "src/hb-subset-table-color.cc",
+        "src/hb-subset-table-layout.cc",
+        "src/hb-subset-table-other.cc",
+        "src/hb-subset-table-var.cc",
         "src/hb-subset.cc",
     ],
     target: {
@@ -133,15 +138,15 @@ cc_library {
     ],
     export_include_dirs: ["src"],
     cflags: [
-        "-DHAVE_PTHREAD",
-        "-DHB_NO_PRAGMA_GCC_DIAGNOSTIC",
-        "-DHAVE_OT",
         "-DHAVE_ICU",
         "-DHAVE_ICU_BUILTIN",
+        "-DHAVE_OT",
+        "-DHAVE_PTHREAD",
+        "-DHB_NO_PRAGMA_GCC_DIAGNOSTIC",
         "-Werror",
-        "-Wno-unused-parameter",
-        "-Wno-missing-field-initializers",
         "-Wno-implicit-fallthrough",
+        "-Wno-missing-field-initializers",
+        "-Wno-unused-parameter",
     ],
 }
 
@@ -236,15 +241,15 @@ cc_library {
 
     export_include_dirs: ["src"],
     cflags: [
-        "-DHAVE_PTHREAD",
-        "-DHB_NO_PRAGMA_GCC_DIAGNOSTIC",
-        "-DHAVE_OT",
         "-DHAVE_ICU",
         "-DHAVE_ICU_BUILTIN",
+        "-DHAVE_OT",
+        "-DHAVE_PTHREAD",
+        "-DHB_NO_PRAGMA_GCC_DIAGNOSTIC",
         "-Werror",
-        "-Wno-unused-parameter",
-        "-Wno-missing-field-initializers",
         "-Wno-implicit-fallthrough",
+        "-Wno-missing-field-initializers",
+        "-Wno-unused-parameter",
     ],
 
     afdo: true,
@@ -401,9 +406,9 @@ license {
         "legacy_unencumbered",
     ],
     license_text: [
-        "LICENSE_OFL.TXT",
         "LICENSE_APACHE2.TXT",
         "LICENSE_MIT_MODERN_VARIANT.TXT",
+        "LICENSE_OFL.TXT",
         "src/ms-use/COPYING", // For MIT license
     ],
 }
