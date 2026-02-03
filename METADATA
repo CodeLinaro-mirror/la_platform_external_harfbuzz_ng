@@ -18,7 +18,7 @@ third_party {
   identifier {
     type: "Git"
     value: "https://github.com/harfbuzz/harfbuzz"
-    version: "700802fe2c8e5db4dbf128389475489aa319dd73"
+    version: "6b285e6e94f0af10c6aa6d31325fd6746aeb2dfe"
     closest_version: "11.4.1"
   }
 }
